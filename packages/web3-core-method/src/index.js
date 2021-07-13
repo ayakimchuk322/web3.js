@@ -315,11 +315,7 @@ Method.prototype._confirmTransaction = function (defer, result, payload) {
 
                             if (isPolling) { // Check if actually a new block is existing on polling
                                 if (lastBlock) {
-                                    block = await _ethereumCall.getBlockByNumber(lastBlock.number + 1);
-                                    if (block) {
-                                        lastBlock = block;
-                                        defer.eventEmitter.emit('confirmation', confirmationCount, receipt, latestBlockHash);
-                                    }
+                                    defer.eventEmitter.emit('confirmation', confirmationCount, receipt, latestBlockHash);
                                 } else {
                                     block = await _ethereumCall.getBlockByNumber(receipt.blockNumber);
                                     lastBlock = block;
